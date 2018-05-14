@@ -18,11 +18,12 @@ classdef testSegmentation< matlab.unittest.TestCase
             zeroImageSameSize = zeros(size(images),'uint8');
             testCase.verifyEqual(images,zeroImageSameSize);
         end
-        
-%         function testBlackStackIsBlacks(testCase)
-%             testBlackStack = testCase.generateBlackStack();
-%             testCase.verifyTrue(testBlackStack == 0);
-%         end
+       
+         function testBlackStackIsBlacks(testCase)
+             testBlackStack = testCase.generateBlackStack();
+             zeroImageSameSize = zeros(size(testBlackStack),'uint8');
+             testCase.verifyEqual(testBlackStack, zeroImageSameSize);
+         end
                 
         function testThresholdStack(testCase)
             images = readStack('Stack.tif');
@@ -34,11 +35,11 @@ classdef testSegmentation< matlab.unittest.TestCase
         end
         
         function blackStack = generateBlackStack(testCase)
-            blackStack = zeros(512,512,10);
+            blackStack = zeros(512,512,10,'uint8');
         end
 
         function whiteStack = generateWhiteStack(testCase)
-            whiteStack = ones(512,512,10);
+            whiteStack = ones(512,512,10,'uint8');
         end
     end
 end
