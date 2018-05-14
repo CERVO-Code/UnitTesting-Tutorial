@@ -22,5 +22,13 @@ classdef testSegmentation< matlab.unittest.TestCase
             testCase.verifyTrue(dim(2) == 512);
             testCase.verifyTrue(dim(3) == 5);            
         end
+        
+        function blackStack = generateBlackStack(testCase)
+            blackStack = zeros(512,512,10);
+        end
+
+        function whiteStack = generateWhiteStack(testCase)
+            whiteStack = ones(512,512,10);
+        end
     end
 end
