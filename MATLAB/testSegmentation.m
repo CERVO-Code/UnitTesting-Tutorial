@@ -12,13 +12,25 @@ classdef testSegmentation< matlab.unittest.TestCase
             testCase.verifyTrue(length(dim) == 3);
         end
         
+        function testReadStack4FramesCheckDimensions(testCase)
+            images = readStack('Stack4.tif's);
+            dim = size(images)
+            testCase.verifyTrue(length(dim) == 3);
+        end
+                
+        function testReadStack10FramesCheckDimensions(testCase)
+            images = readStack('Stack10.tif');
+            dim = size(images)
+            testCase.verifyTrue(length(dim) == 3);
+        end
+                
         function testReadStackCheckReadout(testCase)
             images = readStack('Black.tif');
             
             zeroImageSameSize = zeros(size(images),'uint8');
             testCase.verifyEqual(images,zeroImageSameSize);
         end
-       
+                        
          function testBlackStackIsBlacks(testCase)
              testBlackStack = testCase.generateBlackStack();
              zeroImageSameSize = zeros(size(testBlackStack),'uint8');
