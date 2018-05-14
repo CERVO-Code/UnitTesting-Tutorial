@@ -14,14 +14,15 @@ classdef testSegmentation< matlab.unittest.TestCase
         
         function testReadStackCheckReadout(testCase)
             images = readStack('Black.tif');
-            dim = size(images)
-            testCase.verifyTrue(length(dim) == 3);
+            
+            zeroImageSameSize = zeros(size(images),'uint8');
+            testCase.verifyEqual(images,zeroImageSameSize);
         end
         
-        function testBlackStackIsBlacks(testCase)
-            testBlackStack = testCase.generateBlackStack();
-            testCase.verifyTrue(testBlackStack == 0);
-        end
+%         function testBlackStackIsBlacks(testCase)
+%             testBlackStack = testCase.generateBlackStack();
+%             testCase.verifyTrue(testBlackStack == 0);
+%         end
                 
         function testThresholdStack(testCase)
             images = readStack('Stack.tif');
