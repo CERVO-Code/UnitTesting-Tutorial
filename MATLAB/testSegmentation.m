@@ -3,17 +3,26 @@ classdef testSegmentation< matlab.unittest.TestCase
     methods (Test)
         
         function testATest(testCase)      
-            testCase.verifyEqual(2+3,5);
+            testCase.verifyEqual(2+3,5,'2+3 not equal to 5?');
         end
         
-        function testReadStack(testCase)
+        function testReadStackCheckDimensions(testCase)
             images = readStack('Stack.tif');
             dim = size(images)
-            testCase.verifyTrue(dim(1) == 512);            
-            testCase.verifyTrue(dim(2) == 512);
-            testCase.verifyTrue(dim(3) == 5);
+            testCase.verifyTrue(length(dim) == 3);
         end
         
+        function testReadStackCheckReadout(testCase)
+            images = readStack('Black.tif');
+            dim = size(images)
+            testCase.verifyTrue(length(dim) == 3);
+        end
+        
+        function testBlackStackIsBlacks(testCase)
+            testBlackStack = testCase.generateBlackStack();
+            testCase.verifyTrue(testBlackStack == 0);
+        end
+                
         function testThresholdStack(testCase)
             images = readStack('Stack.tif');
             thresholdedImages = thresholdStack(images, 120);
