@@ -5,12 +5,22 @@ classdef testSegmentation< matlab.unittest.TestCase
         function testATest(testCase)      
             testCase.verifyEqual(2+3,5);
         end
-    
-        function testWhatIsAMesh(testCase)
-            [x,y]=meshgrid(-2:1:2, -2:1:2);
-            testCase.verifyEqual([ -2 -1 0 1 2; -2 -1 0 1 2; -2 -1 0 1 2; -2 -1 0 1 2;-2 -1 0 1 2 ], x);
-            testCase.verifyEqual([ -2 -1 0 1 2; -2 -1 0 1 2; -2 -1 0 1 2; -2 -1 0 1 2;-2 -1 0 1 2 ]', y);
-        end            
-
+        
+        function testReadStack(testCase)
+            images = readStack('Stack.tif');
+            dim = size(images)
+            testCase.verifyTrue(dim(1) == 512);            
+            testCase.verifyTrue(dim(2) == 512);
+            testCase.verifyTrue(dim(3) == 5);
+        end
+        
+        function testThresholdStack(testCase)
+            images = readStack('Stack.tif');
+            thresholdedImages = thresholdStack(images, 120);
+            dim = size(thresholdedImages)
+            testCase.verifyTrue(dim(1) == 512);            
+            testCase.verifyTrue(dim(2) == 512);
+            testCase.verifyTrue(dim(3) == 5);            
+        end
     end
 end
