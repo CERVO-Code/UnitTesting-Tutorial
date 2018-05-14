@@ -13,7 +13,7 @@ classdef testSegmentation< matlab.unittest.TestCase
         end
         
         function testReadStack4FramesCheckDimensions(testCase)
-            images = readStack('Stack4.tif's);
+            images = readStack('Stack4.tif');
             dim = size(images)
             testCase.verifyTrue(length(dim) == 3);
         end
@@ -24,6 +24,12 @@ classdef testSegmentation< matlab.unittest.TestCase
             testCase.verifyTrue(length(dim) == 3);
         end
                 
+        function testReadStackNFramesCheckDimensions(testCase)
+            images = readStack('Stack10.tif');
+            dim = size(images)
+            testCase.verifyTrue(length(dim) == 3);
+        end
+        
         function testReadStackCheckReadout(testCase)
             images = readStack('Black.tif');
             
@@ -44,6 +50,12 @@ classdef testSegmentation< matlab.unittest.TestCase
             testCase.verifyTrue(dim(1) == 512);            
             testCase.verifyTrue(dim(2) == 512);
             testCase.verifyTrue(dim(3) == 5);            
+        end
+
+        function testThresholdArray(testCase)
+            images = zeros(10,10,10);
+            thresholdedImages = thresholdStack(images, 120);
+            testCase.verifyEqual(images, thresholdedImages);
         end
         
         function blackStack = generateBlackStack(testCase)
